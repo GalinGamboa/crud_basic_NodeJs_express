@@ -5,6 +5,22 @@
 // importer express
  import express from 'express'; 
 
+
+ import 'dotenv/config'
+ // Connexion à la base de données MongoDB
+ import mongoose from 'mongoose';
+  main().catch(err => console.log(err));
+  async function main() {
+
+   
+ const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@atlascluster.6tigc6p.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
+   //const uri = `mongodb+srv://${USER}:${PASSWORD}@atlascluster.6tigc6p.mongodb.net/${DBNAME}?retryWrites=true&w=majority`
+ 
+   await mongoose.connect(uri)
+   console.log('db ok')
+}
+
+
 // importer dirname,fileURLToPath 
 import {dirname,join} from 'path';
 import { fileURLToPath } from 'url';
@@ -38,7 +54,7 @@ app.use('/',(req,res,next)=>{
                                               
 
 // écoutez le serveur sur le port 3000
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, ()=>{
    console.log(`server listening on: http://localhost:${PORT}`)
 });
