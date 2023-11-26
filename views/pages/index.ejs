@@ -1,5 +1,46 @@
+<!-- inclure la tête du dossier layouts/head.ejs  -->
 <%- include('../layauts/head', { titlePage:'PageCrud'}) %>;
 
-   <h1>Crud</h1>;
+   <h1>Mascotas:</h1>;
+  
+  <!-- container pour table -->
+  <div class="container">                                   
+      
+    <!-- console.log pour vérifier si l'array est arrivée -->
+      <% console.log (arrayAnimaux) %>
+      <% console.log (typeof(arrayAnimaux)) %>
+      <% console.log(arrayAnimaux.length); %>
 
-<%- include ('../layauts/footer') %>;
+    <!--création de tableau -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Description</th>
+            <th scope="col">actions</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+      <!-- avec ejs passer les éléments de l'array  -->
+          <% if (arrayAnimaux.length) { %>
+            <% arrayAnimaux.forEach(element => { %>
+              <tr>
+                <th scope="row"><%= element.id %></th>
+                <td> <%= element.nom %></td>
+                <td> <%= element.description %></td>
+                <td>
+                  <button type="button" class="btn btn-success">Editar</button>
+                  <button type="button" class="btn btn-danger">Eliminar</button>
+                </td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    
+  </div>
+
+<!-- inclure le footer du dossier layouts/footer.ejs  -->
+<%- include ('../layauts/footer') %>;  
